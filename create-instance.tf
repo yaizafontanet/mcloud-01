@@ -13,10 +13,10 @@ resource "aws_instance" "WordPress" {
     vpc_security_group_ids = [aws_security_group.SG_public_subnet.id]                                       
     user_data = "${file("script.sh")}"                                                                      
     tags = {                                                                                                   
-        Name = "WordPress"                                                                                         
+        Name = "WEB"                                                                                         
     }                                                                                                                                                                                                              
     provisioner "local-exec" {                                                                               
-        command = "echo ${aws_instance.WordPress.public_ip} > publicIP-Wordpress.txt"                                    
+        command = "echo ${aws_instance.WordPress.public_ip} > public.txt"                                    
     }                                                                                                                                                                                                              
 }                                                                                                                                                                                                               
 
