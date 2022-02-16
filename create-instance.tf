@@ -28,7 +28,7 @@ resource "aws_db_instance" "DataBase" {
     engine = "mysql"                                                                          
     engine_version = "5.7.22"                                                                         
     instance_class = "db.t2.micro"                                                                    
-    name = "mcloud-repte01"                                                                           
+    name = "mcloud"                                                                           
     username = "yaiza"                                                                          
     password = "yaiza12345"                                                                     
     parameter_group_name = "default.mysql5.7"                                                               
