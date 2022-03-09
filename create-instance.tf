@@ -40,3 +40,36 @@ resource "aws_db_instance" "DataBase" {
         command = "echo ${aws_db_instance.DataBase.endpoint} > BBDD-RDS.txt"                                       
     }                                                                                                                                                                                                           
 } 
+
+resource "aws_alb" "alb" {
+  name            = "alb"
+  security_groups = ["${aws_security_group.alb.id}"]
+  subnets         = aws_db_subnet_group.db_subnet.name
+}
+
+resource "aws_alb_target_group" "group" {
+  name     = "target-alb"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.my_vpc.id
+  stickiness {
+    type = "lb_cookie"
+  }
+ 
+  health_check {
+    path = "/login"
+    port = 80
+  }
+}
+
+resource "aws_alb_listener" "listener_http" {
+  load_balancer_arn = aws_alb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = aws_alb_target_group.group.arn
+    type             = "forward"
+  }
+}
+
