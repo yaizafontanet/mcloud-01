@@ -21,14 +21,12 @@ sudo wget https://s3.amazonaws.com/bucketforwordpresslab-donotdelete/htaccess.tx
 sudo mv htaccess.txt .htaccess                                                                          
 sudo systemctl start httpd                                                                              
 systemctl enable httpd
-touch /var/www/html/wp-config.php
-cat > /var/www/html/wp-config.php << EOF
-<?php
+echo "<?php
 /**
  * The base configuration for WordPress
  *
  * The wp-config.php creation script uses this file during the installation.
- * You don't have to use the web site, you can copy this file to "wp-config.php"
+ * You don't have to use the web site, you can copy this file to 'wp-config.php'
  * and fill in the values.
  *
  * This file contains the following configurations:
@@ -106,7 +104,7 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
-/* Add any custom values between this line and the "stop editing" line. */
+/* Add any custom values between this line and the 'stop editing' line. */
 
 
 
@@ -118,5 +116,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';
-EOF
+require_once ABSPATH . 'wp-settings.php';" > /var/www/html/wp-config.php
